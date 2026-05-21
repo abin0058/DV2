@@ -1,0 +1,82 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 450,
+  "height": 400,
+  "title": {
+    "text": "Australian Overseas Migration",
+    "subtitle": "Arrivals, Departures, and Net Migration (2015 - 2019)",
+    "fontSize": 16,
+    "subtitleFontSize": 12
+  },
+  "data": {
+    "url": "data/Overseas_Migration.csv" 
+  },
+  "transform": [
+    {
+      "fold": [
+        "Arrivals (000)",
+        "Departures (000)",
+        "Net Migration (000)"
+      ],
+      "as": ["Category", "Value"]
+    }
+  ],
+  "mark": {
+    "type": "line",
+    "point": {
+      "filled": true,
+      "fill": "white"
+    },
+    "strokeWidth": 2.5
+  },
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "ordinal",
+      "title": "Quarter",
+      "sort": null, 
+      "axis": {
+        "labelAngle": -45,
+        "labelFontSize": 11,
+        "titleFontSize": 13
+      }
+    },
+    "y": {
+      "field": "Value",
+      "type": "quantitative",
+      "title": "Number of People ('000)",
+      "axis": {
+        "grid": true,
+        "labelFontSize": 12,
+        "titleFontSize": 13
+      }
+    },
+    "color": {
+      "field": "Category",
+      "type": "nominal",
+      "title": "Category",
+      "scale": {
+        "domain": [
+            "Arrivals (000)",
+            "Departures (000)",
+            "Net Migration (000)"
+        ],
+        "range": ["#2c7bb6", "#e74c3c", "#2ca02c"]
+      },
+      "legend": {
+        "orient": "top-right",
+        "titleFontSize": 12,
+        "labelFontSize": 12
+      }
+    },
+    "tooltip": [
+      {"field": "Year", "type": "ordinal", "title": "Period"},
+      {"field": "Category", "type": "nominal", "title": "Category"},
+      {"field": "Value", "type": "quantitative", "title": "Count ('000)", "format": ",.2f"}
+    ]
+  },
+  "config": {
+    "view": {"stroke": "transparent"},
+    "axis": {"domainColor": "#ccc", "tickColor": "#ccc"}
+  }
+}

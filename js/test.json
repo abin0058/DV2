@@ -1,0 +1,12 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": { "text": "Mean Prices" },
+  "data": {
+    "url": "data/Mean_Dwelling_Prices.csv"
+  },
+  "mark": "bar",
+  "encoding": {
+    "x": { "field": "Mean price ($000)", "type": "quantitative" },
+    "y": { "field": "id", "type": "nominal", "title": null }
+  }
+}

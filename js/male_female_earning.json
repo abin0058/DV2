@@ -1,0 +1,88 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Median Full-Time Weekly Earnings by Gender",
+    "subtitle": "Highlighting the persistent income gap (2020 - 2025)",
+    "fontSize": 16,
+    "subtitleFontSize": 12
+  },
+  "data": {
+    "url": "data/Median_Weekly_Earnings_By_Year.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.Gender != 'Persons'"
+    },
+    {
+      "filter": "datum['Employee Type'] == 'Full-time'"
+    }
+  ],
+  "facet": {
+    "row": {
+      "field": "Date",
+      "type": "ordinal",
+      "title": "Year",
+      "sort": "descending",
+      "header": {
+        "labelAngle": 0,
+        "labelFontSize": 13,
+        "titleFontSize": 14,
+        "labelColor": "#333"
+      }
+    }
+  },
+  "spec": {
+    "width": 400,
+    "height": 100,
+    "mark": {
+      "type": "bar",
+      "cornerRadiusEnd": 4
+    },
+    "encoding": {
+      "y": {
+        "field": "Gender",
+        "type": "nominal",
+        "title": null,
+        "axis": {
+          "labelFontSize": 12
+        }
+      },
+      "x": {
+        "field": "Weekly Earnings",
+        "type": "quantitative",
+        "title": "Median Weekly Earnings ($)",
+        "scale": {"domain": [0, 2000]},
+        "axis": {
+          "grid": true,
+          "labelFontSize": 11,
+          "titleFontSize": 12,
+          "format": "$,.0f"
+        }
+      },
+      "color": {
+        "field": "Gender",
+        "type": "nominal",
+        "title": "Gender",
+        "scale": {
+          "domain": ["Males", "Females"],
+          "range": ["#2c7bb6", "#e74c3c"]
+        },
+        "legend": {
+          "orient": "top",
+          "titleFontSize": 12,
+          "labelFontSize": 12
+        }
+      },
+      "tooltip": [
+        {"field": "Date", "type": "ordinal", "title": "Year"},
+        {"field": "Gender", "type": "nominal", "title": "Gender"},
+        {"field": "Employee Type", "type": "nominal", "title": "Employee Type"},
+        {"field": "Weekly Earnings", "type": "quantitative", "title": "Weekly Earnings", "format": "$,.2f"}
+      ]
+    }
+  },
+  "config": {
+    "view": {"stroke": "transparent"},
+    "axis": {"domainColor": "#ccc", "tickColor": "#ccc"}
+  }
+}
